@@ -26,6 +26,12 @@ inputs:
   test_search_query:
     required: false
     description: 'Search query to trigger tests.'
+  polling_timeout:
+    required: false
+    description: 'The duration in milliseconds after which datadog-ci stops polling for test results.'
+  start_url:
+    required: false
+    description: 'New start URL to provide to the HTTP or browser test.'
 
 runs:
   using: 'node12'

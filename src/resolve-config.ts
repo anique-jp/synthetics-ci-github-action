@@ -41,6 +41,11 @@ export const resolveConfig = async (): Promise<synthetics.SyntheticsCIConfig> =>
     .map((file: string) => file.trim())
   const testSearchQuery = getDefinedInput('test_search_query')
   const subdomain = getDefinedInput('subdomain')
+  const pollingTimeout = getDefinedInput('polling_timeout')
+  const startUrl = getDefinedInput('start_url')
+  const global: synthetics.ConfigOverride = {
+    startUrl,
+  }
 
   let config = JSON.parse(JSON.stringify(DEFAULT_CONFIG))
   // Override with file config variables
@@ -66,6 +71,8 @@ export const resolveConfig = async (): Promise<synthetics.SyntheticsCIConfig> =>
       publicIds,
       subdomain,
       testSearchQuery,
+      pollingTimeout,
+      global,
     })
   )
 

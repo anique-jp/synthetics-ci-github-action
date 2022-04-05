@@ -274,6 +274,11 @@ const resolveConfig = () => __awaiter(void 0, void 0, void 0, function* () {
     const files = (_b = (0, exports.getDefinedInput)('files')) === null || _b === void 0 ? void 0 : _b.split(',').map((file) => file.trim());
     const testSearchQuery = (0, exports.getDefinedInput)('test_search_query');
     const subdomain = (0, exports.getDefinedInput)('subdomain');
+    const pollingTimeout = (0, exports.getDefinedInput)('polling_timeout');
+    const startUrl = (0, exports.getDefinedInput)('start_url');
+    const global = {
+        startUrl,
+    };
     let config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
     // Override with file config variables
     try {
@@ -296,6 +301,8 @@ const resolveConfig = () => __awaiter(void 0, void 0, void 0, function* () {
         publicIds,
         subdomain,
         testSearchQuery,
+        pollingTimeout,
+        global,
     }));
     return config;
 });
@@ -18389,16 +18396,6 @@ exports.isBuffer = __nccwpck_require__(4293).Buffer.isBuffer;
 function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
-
-
-/***/ }),
-
-/***/ 4137:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const binding = __nccwpck_require__(4240);
-
-module.exports = binding.getCPUInfo;
 
 
 /***/ }),
@@ -70476,7 +70473,7 @@ const crypto = __nccwpck_require__(6417);
 
 let cpuInfo;
 try {
-  cpuInfo = __nccwpck_require__(4137)();
+  cpuInfo = __nccwpck_require__(7295)();
 } catch {}
 
 const { bindingAvailable } = __nccwpck_require__(5708);
@@ -70851,7 +70848,7 @@ let AESGCMDecipher;
 let ChaChaPolyDecipher;
 let GenericDecipher;
 try {
-  binding = __nccwpck_require__(9041);
+  binding = __nccwpck_require__(9623);
   ({ AESGCMCipher, ChaChaPolyCipher, GenericCipher,
      AESGCMDecipher, ChaChaPolyDecipher, GenericDecipher } = binding);
 } catch {}
@@ -106696,17 +106693,11 @@ exports.Stream = Stream;
 
 /***/ }),
 
-/***/ 4240:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 9623:
+/***/ ((module) => {
 
-module.exports = require(__nccwpck_require__.ab + "build/Release/cpufeatures.node")
+module.exports = eval("require")("./crypto/build/Release/sshcrypto.node");
 
-/***/ }),
-
-/***/ 9041:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-module.exports = require(__nccwpck_require__.ab + "lib/protocol/crypto/build/Release/sshcrypto.node")
 
 /***/ }),
 
@@ -106722,6 +106713,14 @@ module.exports = eval("require")("bufferutil");
 /***/ ((module) => {
 
 module.exports = eval("require")("coffee-script");
+
+
+/***/ }),
+
+/***/ 7295:
+/***/ ((module) => {
+
+module.exports = eval("require")("cpu-features");
 
 
 /***/ }),
